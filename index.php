@@ -121,18 +121,16 @@ $tasks = [
                 <table class="tasks">
                     <?php foreach ($tasks as $value) : ?>
                         <?php if ($show_complete_tasks || !$value['done']) : ?>
-                    <tr class="tasks__item task <?= $task['done'] ? 'task--completed' : '' ?>">
+                    <tr class="tasks__item task <?= $value['done'] ? 'task--completed' : '' ?>">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" <?= $value['done'] ? 'checked' : '' ?>>
                                 <span class="checkbox__text"><?= $value['task']; ?></span>
                             </label>
                         </td>
-
                         <td class="task__file">
                             <a class="download-link" href="#">Home.psd</a>
                         </td>
-
                         <td class="task__date"><?= $value['date']; ?></td>
                     </tr>
                     <?php endif; ?>
