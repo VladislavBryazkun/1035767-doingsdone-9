@@ -42,12 +42,13 @@ $tasks = [
 ];
 function countTasks($tasks, $task_name)
 {
-    $category_task = array_filter($tasks, function ($n) use ($task_name){
-        return $n['category'] == $task_name; }
+    $category_task = array_filter($tasks, function ($n) use ($task_name) {
+        return $n['category'] == $task_name;
+    }
     );
-        return
-    count($category_task);
+        return count($category_task);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -91,11 +92,11 @@ function countTasks($tasks, $task_name)
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $project_name): ?>
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?= $project_name; ?></a>
-                            <span class="main-navigation__list-item-count"><?= countTasks($tasks,
-                                $project_name) ?></span>
-                        </li>
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link" href="#"><?= $project_name; ?></a>
+                                <span class="main-navigation__list-item-count"><?= countTasks($tasks,
+                                        $project_name) ?></span>
+                            </li>
                         <?php endforeach; ?>
                     </ul>
                 </nav>
@@ -132,19 +133,19 @@ function countTasks($tasks, $task_name)
                 <table class="tasks">
                     <?php foreach ($tasks as $task) : ?>
                         <?php if ($show_complete_tasks || !$task['done']) : ?>
-                    <tr class="tasks__item task <?= $task['done'] ? 'task--completed' : '' ?>">
-                        <td class="task__select">
-                            <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden task__checkbox" <?= $task['done'] ? 'checked' : '' ?>>
-                                <span class="checkbox__text"><?= $task['task']; ?></span>
-                            </label>
-                        </td>
-                        <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
-                        </td>
-                        <td class="task__date"><?= $task['date']; ?></td>
-                    </tr>
-                    <?php endif; ?>
+                            <tr class="tasks__item task <?= $task['done'] ? 'task--completed' : '' ?>">
+                                <td class="task__select">
+                                    <label class="checkbox task__checkbox">
+                                        <input class="checkbox__input visually-hidden task__checkbox" <?= $task['done'] ? 'checked' : '' ?>>
+                                        <span class="checkbox__text"><?= $task['task']; ?></span>
+                                    </label>
+                                </td>
+                                <td class="task__file">
+                                    <a class="download-link" href="#">Home.psd</a>
+                                </td>
+                                <td class="task__date"><?= $task['date']; ?></td>
+                            </tr>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
             </main>
