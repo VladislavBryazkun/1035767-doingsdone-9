@@ -25,7 +25,7 @@
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
-                        <p><?=$my_name?></p>
+                        <p><?= $my_name; ?></p>
                         <a href="#">Выйти</a>
                     </div>
                 </div>
