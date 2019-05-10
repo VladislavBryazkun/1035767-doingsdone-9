@@ -15,6 +15,7 @@ CREATE TABLE projects (
         status TINYINT DEFAULT 0,
         dt_add TIMESTAMP DEFAULT  CURRENT_TIMESTAMP,
         name VARCHAR(128) NOT NULL,
+        file TEXT
          );
 
     CREATE TABLE users (
