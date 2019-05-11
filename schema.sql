@@ -18,24 +18,22 @@ CREATE TABLE projects
     id      INT AUTO_INCREMENT PRIMARY KEY,
     name    VARCHAR(128),
     user_id INT UNSIGNED NOT NULL,
-    FOREIGN KEY user_id REFERENCES users (id)
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 
 CREATE TABLE tasks
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
-    task        VARCHAR(128),
-    category    VARCHAR(128),
     status      TINYINT(1)   DEFAULT 0,
     date_create TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
     name        VARCHAR(512) NOT NULL,
     file        VARCHAR(512) DEFAULT NULL,
-    finish_time DATE         DEFAULT NULL,
+    finish_date DATE         DEFAULT NULL,
     user_id     INT UNSIGNED NOT NULL,
     project_id  INT          NOT NULL,
-    FOREIGN KEY user_id REFERENCES users (id),
-    FOREIGN KEY project_id REFERENCES projects (id)
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (project_id) REFERENCES projects (id)
 
 );
 
