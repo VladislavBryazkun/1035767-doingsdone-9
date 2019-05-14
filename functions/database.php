@@ -26,3 +26,18 @@ function get_task_by_project(int $project_id): array
     $projects = db_fetch_data($link, $query, [$project_id]);
     return $projects ?? [];
 }
+
+function add_task(array $task): int
+{
+    $link = DbConnection::getConnection();
+    $query = "INSERT INTO tasks (name, finish_date, project_id, user_id, file, file_name) VALUES (?, ?, ?, ?, ?, ?)";
+    $id = db_insert_data($link, $query, [
+        $task['name'],
+        $task['date'],
+        $task['project_id'],
+        $task['user_id'],
+        $task['file'] ?? '',
+        $task['file_name'] ?? ''
+    ]);
+    return $id;
+}
