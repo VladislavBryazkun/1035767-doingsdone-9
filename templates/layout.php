@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $title; ?></title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/flatpickr.min.css">
+    <link rel="stylesheet" href="<?=STATIC_DIR?>css/normalize.css">
+    <link rel="stylesheet" href="<?=STATIC_DIR?>css/style.css">
+    <link rel="stylesheet" href="<?=STATIC_DIR?>css/flatpickr.min.css">
 </head>
 
 <body>
@@ -99,7 +99,7 @@
     </div>
 </footer>
 
-<script src="flatpickr.js"></script>
-<script src="script.js"></script>
+<script src="<?=STATIC_DIR?>scripts/flatpickr.js"></script>
+<script src="<?=STATIC_DIR?>scripts/script.js"></script>
 </body>
 </html>

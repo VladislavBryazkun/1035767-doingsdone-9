@@ -1,4 +1,25 @@
 <?php
+
+/**
+ * Class DbConnection
+ * Singleton for get dbConnection
+ */
+class DbConnection
+{
+    private static $connection;
+    static function getConnection()
+    {
+        if (self::$connection === null) {
+            self::$connection = mysqli_connect('localhost', 'root', '', 'justdoit');
+            if (!self::$connection) {
+                die("Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error());
+            }
+            mysqli_set_charset(self::$connection, "utf8");
+        }
+        return self::$connection;
+    }
+}
+
 /**
  * Проверяет переданную дату на соответствие формату 'ГГГГ-ММ-ДД'
  *
@@ -140,5 +161,40 @@ function include_template($name, array $data = []) {
 
     $result = ob_get_clean();
 
+    return $result;
+}
+
+/**
+ * Функция получения записей из БД
+ * @param $link
+ * @param $sql
+ * @param array $data
+ * @return array|null
+ */
+function db_fetch_data($link, $sql, $data = [])
+{
+    $result = [];
+    $stmt = db_get_prepare_stmt($link, $sql, $data);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    if ($res) {
+        $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    }
+    return $result;
+}
+/**
+ * Функция добавление новой  записи из БД
+ * @param $link
+ * @param $sql
+ * @param array $data
+ * @return int
+ */
+function db_insert_data($link, $sql, $data = []): int
+{
+    $stmt = db_get_prepare_stmt($link, $sql, $data);
+    $result = mysqli_stmt_execute($stmt);
+    if ($result) {
+        $result = mysqli_insert_id($link);
+    }
     return $result;
 }

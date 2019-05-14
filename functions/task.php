@@ -1,10 +1,10 @@
 ﻿<?php
-function countTasks($tasks, $task_name)
+function countTasks($tasks, $project_id)
 {
-    $category_task = array_filter($tasks, function ($n) use ($task_name) {
-        return $n['category'] == $task_name;
-    }
-    );
+    $category_task = array_filter($tasks, function ($n) use ($project_id) {
+        return $n['project_id'] == $project_id;
+    });
+
     return count($category_task);
 }
 
