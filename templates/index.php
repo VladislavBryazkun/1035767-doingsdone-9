@@ -3,9 +3,9 @@
     <nav class="main-navigation">
         <ul class="main-navigation__list">
             <?php foreach ($projects as $project): ?>
-                <li class="main-navigation__list-item">
-                    <a class="main-navigation__list-item-link" href="#"><?= $project['name']; ?></a>
-                    <span class="main-navigation__list-item-count"><?= countTasks($tasks, $project['id']) ?></span>
+                <li class="main-navigation__list-item <?= isset($project_id) ? $project_id == $project['id'] ? 'main-navigation__list-item--active' : '' : '' ?>">
+                    <a class="main-navigation__list-item-link" href="/?project_id=<?=$project['id']?>"><?= $project['name']; ?></a>
+                    <span class="main-navigation__list-item-count"><?= $project['count'] ?></span>
                 </li>
             <?php endforeach; ?>
         </ul>
