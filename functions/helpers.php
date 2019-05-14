@@ -198,3 +198,18 @@ function db_insert_data($link, $sql, $data = []): int
     }
     return $result;
 }
+
+/**
+ * Меняет имя файла на набор уникальных символов
+ * @param $key string ключ, имя поля с выбранным файлом
+ * @param $file_dir string дирректория
+ * @return string
+ */
+function upload_file($key, $file_dir)
+{
+    $tmp_name = $_FILES[$key]['tmp_name'];
+    $path = $_FILES[$key]['name'];
+    $filename = uniqid() . '.' . pathinfo($path, PATHINFO_EXTENSION);
+    move_uploaded_file($tmp_name, ROOT_DIR . $file_dir . DIRECTORY_SEPARATOR . $filename);
+    return $file_dir . DIRECTORY_SEPARATOR . $filename;
+}
