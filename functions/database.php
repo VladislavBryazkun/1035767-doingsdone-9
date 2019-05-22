@@ -41,3 +41,31 @@ function add_task(array $task): int
     ]);
     return $id;
 }
+
+/**
+ * Возвращает пользователя с запрашиваемым email,
+ * если такой не найден возвращает пустой массив
+ * @param string $email
+ * @return array
+ */
+function get_user_by_email (string $email): array
+{
+    $link = DbConnection::getConnection();
+    $query = "SELECT * FROM users WHERE email=?";
+    $user = db_fetch_data($link, $query, [$email]);
+
+    return $user[0] ?? [];
+
+}
+
+
+function create_user (array $users)
+{
+    $link = DbConnection::getConnection();
+    $query = "INSERT INTO users (email, name, password) VALUES (?, ?, ?)";
+    db_insert_data($link, $query, [
+        $users['email'],
+        $users['name'],
+        $users['password']
+    ]);
+}

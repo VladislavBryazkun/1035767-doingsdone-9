@@ -16,9 +16,9 @@
     <div class="container container--with-sidebar">
         <header class="main-header">
             <a href="/">
-                <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
+                <img src="<?=STATIC_DIR?>img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
-
+            <?php if($is_auth): ?>
             <div class="main-header__side">
                 <a class="main-header__side-item button button--plus open-modal" href="/add.php">Добавить
                     задачу</a>
@@ -30,9 +30,15 @@
                     </div>
                 </div>
             </div>
+            <?php else: ?>
+            <div class="main-header__side">
+                <a class="main-header__side-item button button--transparent" href="/register.php">Войти</a>
+            </div>
+            <?php endif; ?>
         </header>
 
         <div class="content">
+            <?php if($is_auth): ?>
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
@@ -49,6 +55,7 @@
                 <a class="button button--transparent button--plus content__side-button"
                    href="pages/form-project.html" target="project_add">Добавить проект</a>
             </section>
+            <?php endif; ?>
             <?= $content; ?>
         </div>
     </div>
@@ -62,7 +69,9 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
-        <a class="main-footer__button button button--plus" href="/add.php">Добавить задачу</a>
+        <?php if($is_auth): ?>
+            <a class="main-footer__button button button--plus" href="/add.php">Добавить задачу</a>
+        <?php endif;?>
 
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>
