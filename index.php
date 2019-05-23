@@ -27,6 +27,7 @@ $layout_content = include_template('layout.php',
         'project_id' => $project_id,
         'title' => 'Дела впорядке',
         'my_name' => $user_name,
+        'is_auth' => $is_auth,
     ]
 );
 

@@ -1,9 +1,11 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+$is_auth = rand(0, 1);
 
 $user_id = 1;
 $user_name = 'Владислав';
+
 date_default_timezone_set('Europe/Moscow');
 
 define('ROOT_DIR', __DIR__ . DIRECTORY_SEPARATOR);
