@@ -3,6 +3,10 @@ require_once('boot.php');
 $errors = [];
 $fields = [];
 
+if ($is_auth) {
+    header("Location: /");
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $required = ['name', 'password', 'email'];
@@ -22,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    if (strlen($fields['password']) < 6) {
+    if (!isset($errors['password']) && strlen($fields['password']) < 6) {
         $errors['password'] = 'Пароль должен быть не менне 6 символов';
     }
 
@@ -50,7 +54,7 @@ $layout = include_template('layout.php',
         'content' => $content,
         'projects' => $projects,
         'title' => 'Регистрация аккаунта',
-        'my_name' => $user_name
+        'is_auth' => $is_auth
     ]
 );
 
