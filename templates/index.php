@@ -9,10 +9,10 @@
 
     <div class="tasks-controls">
         <nav class="tasks-switch">
-            <a href="/" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-            <a href="/" class="tasks-switch__item">Повестка дня</a>
-            <a href="/" class="tasks-switch__item">Завтра</a>
-            <a href="/" class="tasks-switch__item">Просроченные</a>
+            <a href="/" class="tasks-switch__item <?=isset($tab['all']) || !count($tab) ? 'tasks-switch__item--active' : ''?>">Все задачи</a>
+            <a href="index.php?tab=today" class="tasks-switch__item <?=isset($tab['today']) ? 'tasks-switch__item--active' : ''?>">Повестка дня</a>
+            <a href="index.php?tab=tomorrow" class="tasks-switch__item <?=isset($tab['tomorrow']) ? 'tasks-switch__item--active' : ''?>">Завтра</a>
+            <a href="index.php?tab=expired" class="tasks-switch__item <?=isset($tab['expired']) ? 'tasks-switch__item--active' : ''?>">Просроченные</a>
         </nav>
 
         <label class="checkbox">
@@ -29,7 +29,7 @@
                 <tr class="tasks__item task <?= $task['status'] ? 'task--completed' : important_task($task['finish_date']) ?>">
                     <td class="task__select">
                         <label class="checkbox task__checkbox">
-                            <input class="checkbox__input visually-hidden task__checkbox" <?= $task['status'] ? 'checked' : '' ?>>
+                            <input value="<?=$task['id']?>" type="checkbox" class="checkbox__input visually-hidden task__checkbox" <?= $task['status'] ? 'checked' : '' ?>>
                             <span class="checkbox__text"><?= $task['name']; ?></span>
                         </label>
                     </td>

@@ -34,6 +34,13 @@ function check_available_project_id(int $id, array $projects): bool
     return in_array($id, array_column($projects, 'id'));
 }
 
+function check_available_project_name(string $name, array $projects): bool
+{
+    $projects_name = array_map("mb_strtoupper", array_column($projects, 'name'));
+    return in_array(mb_strtoupper($name), $projects_name);
+}
+
+
 /**
  * Проверка соответствия даты
  * @param $key

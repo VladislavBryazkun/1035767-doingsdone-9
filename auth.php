@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $get_user = get_user_by_email($fields['email']);
         if (count($get_user) && password_verify($fields['password'], $get_user['password'])) {
 
-            $_SESSION['user'] = ['id' => $get_user['id'], 'name' => $get_user['name']];
+            $_SESSION['user'] = ['id' => intval($get_user['id']), 'name' => $get_user['name']];
             header("Location: /");
             exit();
         }

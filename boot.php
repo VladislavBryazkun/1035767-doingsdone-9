@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL);
 
 
-$show_complete_tasks = rand(0, 1);
+$show_complete_tasks = isset($_GET['show_completed']) ? intval($_GET['show_completed']) : 0;
 $is_auth = false;
 $user = [];
 

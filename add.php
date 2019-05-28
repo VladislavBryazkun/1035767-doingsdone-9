@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $task['file'] = upload_file('file',   'uploads');
             $task['file_name'] = $_FILES['file']['name'];
         }
-        $task['user_id'] = $user_id;
+        $task['user_id'] = $user['id'];
         $task_id = add_task($task);
         header("Location: /index.php");
     }

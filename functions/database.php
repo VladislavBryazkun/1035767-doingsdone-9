@@ -4,19 +4,48 @@ function get_projects_by_user_id(int $user_id): array
 {
     $link = DbConnection::getConnection();
     $query = "SELECT projects.id, projects.name, count(tasks.id) as count 
-              FROM projects JOIN tasks ON projects.id = tasks.project_id
+              FROM projects LEFT JOIN tasks ON projects.id = tasks.project_id
               WHERE projects.user_id=? 
               GROUP BY projects.id, projects.name";
     $projects = db_fetch_data($link, $query, [$user_id]);
     return $projects ?? [];
 }
 
-function get_tasks_by_user_id(int $user_id): array
+function get_tasks_by_user_id(int $user_id, string $tab): array
 {
+    switch ($tab) {
+        case "today":
+            $where = " = CURRENT_DATE";
+            break;
+        case "tomorrow":
+            $where = " = DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY)";
+            break;
+        case "expired":
+            $where = " < CURRENT_DATE";
+            break;
+    }
+    $where_query = isset($where) ? " AND finish_date" . "{$where}" : '';
+
     $link = DbConnection::getConnection();
-    $query = "SELECT * FROM tasks WHERE user_id=?";
+    $query = "SELECT * FROM tasks WHERE user_id=? ".$where_query;
     $projects = db_fetch_data($link, $query, [$user_id]);
     return $projects ?? [];
+}
+
+function get_task_by_task_id(int $task_id): array
+{
+    $link = DbConnection::getConnection();
+    $query = "SELECT * FROM tasks WHERE id=?";
+    $task = db_fetch_data($link, $query, [$task_id]);
+    return $task[0] ?? [];
+}
+
+function task_status_update(int $task_id, int $status)
+{
+    $link = DbConnection::getConnection();
+    $query = "UPDATE tasks SET status=? WHERE id=?";
+    $stmt = db_get_prepare_stmt($link, $query, [$status, $task_id]);
+    mysqli_stmt_execute($stmt);
 }
 
 function get_task_by_project(int $project_id): array
@@ -39,6 +68,14 @@ function add_task(array $task): int
         $task['file'] ?? '',
         $task['file_name'] ?? ''
     ]);
+    return $id;
+}
+
+function add_project(int $user_id, string $name): int
+{
+    $link = DbConnection::getConnection();
+    $query = "INSERT INTO projects (name, user_id) VALUES (?, ?)";
+    $id = db_insert_data($link, $query, [$name, $user_id]);
     return $id;
 }
 
