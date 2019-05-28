@@ -1,5 +1,12 @@
 <?php
 require_once ('boot.php');
+
+if (!$is_auth) {
+    header("Location: /");
+    exit();
+}
+
+
 $errors = [];
 $task = [];
 
@@ -41,7 +48,7 @@ $layout_content = include_template('layout.php',
         'content' => $content,
         'projects' => $projects,
         'title' => 'Добавление задачи',
-        'my_name' => $user_name,
+        'user' => $user,
         'is_auth' => $is_auth
     ]
 );
