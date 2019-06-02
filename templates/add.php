@@ -4,7 +4,7 @@
     <form class="form" enctype="multipart/form-data" action="add.php" method="post" autocomplete="off">
         <div class="form__row">
             <label class="form__label" for="name">Название <sup>*</sup></label>
-            <input class="form__input <?= $errors['name'] ? 'form__input--error' : '' ?>" type="text" name="name" id="name" value="<?=$task['name'] ?? '' ?>" placeholder="Введите название">
+            <input class="form__input <?= isset($errors['name']) ? 'form__input--error' : '' ?>" type="text" name="name" id="name" value="<?=$task['name'] ?? '' ?>" placeholder="Введите название">
             <p class="form__message"><?=$errors['name'] ?? '' ?></p>
         </div>
 
@@ -13,7 +13,8 @@
 
             <select class="form__input form__input--select" name="project_id" id="project">
                 <?php foreach ($projects as $project): ?>
-                    <option value="<?=$project['id']?>" <?= isset($task['project_id']) && $project['id'] == $task['project_id'] ? 'selected' : ''?>><?=$project['name']?></option>
+
+                    <option value="<?=$project['id']?>" <?= isset($task['project_id']) && $project['id'] === $task['project_id'] ? 'selected' : ''?>><?=$project['name']?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -21,7 +22,7 @@
         <div class="form__row">
             <label class="form__label" for="finish_date">Дата выполнения</label>
 
-            <input class="form__input form__input--date <?= $errors['date'] ? 'form__input--error' : '' ?> " type="text" name="date" id="date" value="<?=$task['date'] ?? '' ?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
+            <input class="form__input form__input--date <?= isset($errors['date']) ? 'form__input--error' : '' ?> " type="text" name="date" id="date" value="<?=$task['date'] ?? '' ?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
             <p class="form__message"><?=$errors['date'] ?? '' ?></p>
         </div>
 

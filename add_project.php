@@ -10,7 +10,7 @@ $errors = [];
 $fields = [];
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $required = ['name'];
     list($errors, $fields) = check_in_data($required);
 
