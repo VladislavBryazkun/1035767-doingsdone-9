@@ -1,5 +1,4 @@
 <?php
-
 function get_projects_by_user_id(int $user_id): array
 {
     $link = DbConnection::getConnection();

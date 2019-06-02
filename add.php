@@ -11,18 +11,23 @@ $errors = [];
 $task = [];
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $required = ['name', 'project_id', 'date'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $required = ['name', 'project_id'];
     list($errors, $task) = check_in_data($required);
 
-    if (!isset($errors['project']))
+    if (!isset($errors['project_id']))
     {
         if (!is_numeric($task['project_id']) || !check_available_project_id($task['project_id'], $projects)) {
             $errors['project_id'] = "Введен не коррктный проект!";
         }
     }
+    $task["project_id"] = is_numeric($task["project_id"]) ? intval($task["project_id"]) : 0;
 
-    check_date('date', $errors);
+    $task["date"] = null;
+    if (isset($_POST['date']) && !empty($_POST['date'])) {
+        $task["date"] = $_POST['date'];
+        check_date('date', $errors);
+    }
 
     if (!count($errors)) {
         if (isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {

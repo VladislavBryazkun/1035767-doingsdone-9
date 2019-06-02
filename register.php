@@ -8,7 +8,7 @@ if ($is_auth) {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $required = ['name', 'password', 'email'];
     list($errors, $fields) = check_in_data($required);
 
