@@ -1,4 +1,9 @@
 <?php
+/**
+ * Получение проектов для пользователя.
+ * @param int $user_id
+ * @return array
+ */
 function get_projects_by_user_id(int $user_id): array
 {
     $link = DbConnection::getConnection();
@@ -50,6 +55,7 @@ function get_tasks_by_user_id(int $user_id, int $project_id = 0, string $search_
 
 
 /**
+ * Получение задачи по её id
  * @param int $task_id
  * @return array
  */
@@ -62,6 +68,7 @@ function get_task_by_task_id(int $task_id): array
 }
 
 /**
+ * Обновление статуса задач
  * @param int $task_id
  * @param int $status
  */
@@ -74,6 +81,7 @@ function task_status_update(int $task_id, int $status)
 }
 
 /**
+ * Получение задач по проекту.
  * @param int $project_id
  * @return array
  */
@@ -86,6 +94,7 @@ function get_task_by_project(int $project_id): array
 }
 
 /**
+ * Добавление задачи.
  * @param array $task
  * @return int
  */
@@ -105,6 +114,7 @@ function add_task(array $task): int
 }
 
 /**
+ * Добавляем проект
  * @param int $user_id
  * @param string $name
  * @return int
@@ -133,7 +143,37 @@ function get_user_by_email (string $email): array
 
 }
 
+/**
+ * Получаем задачу по дате выполнения
+ * @return array
+ */
+function get_today_tasks(): array
+{
+    $link = DbConnection::getConnection();
+    $query = "SELECT tasks.id as id, tasks.name as task_name, finish_date, users.name as user_name, users.email as email FROM tasks LEFT JOIN users ON tasks.user_id=users.id WHERE finish_date = CURRENT_DATE AND status = 0 AND notify = 0";
+    $tasks = db_fetch_data($link, $query);
 
+    return $tasks ?? [];
+}
+
+/**
+ * Устанававливаем - отправлено ли сообщение.
+ * @param int $task_id
+ * @param int $status
+ */
+function task_notify_update(int $task_id, int $status)
+{
+    $link = DbConnection::getConnection();
+    $query = "UPDATE tasks SET notify=? WHERE id=?";
+    $stmt = db_get_prepare_stmt($link, $query, [$status, $task_id]);
+    mysqli_stmt_execute($stmt);
+}
+
+
+/**
+ * Создание пользователя.
+ * @param array $users
+ */
 function create_user (array $users)
 {
     $link = DbConnection::getConnection();

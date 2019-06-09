@@ -1,4 +1,9 @@
 <?php
+/**
+ * Важная задача или нет (срок выполнения)
+ * @param $date
+ * @return string
+ */
 function important_task($date)
 {
     if (!$date || empty($date)) {
@@ -29,6 +34,12 @@ function check_in_data (array $required)
     return [$errors, $current_array];
 }
 
+/**
+ * Проверка на существование проекта у пользователя по id
+ * @param int $id
+ * @param array $projects
+ * @return bool
+ */
 function check_available_project_id(int $id, array $projects): bool
 {
     return in_array($id, array_column($projects, 'id'));
