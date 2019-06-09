@@ -38,7 +38,7 @@ CREATE TABLE tasks
 );
 
 
-
+CREATE  FULLTEXT INDEX search_justdoit ON tasks(name);
 CREATE INDEX project_name ON projects (name);
 CREATE INDEX status ON tasks (status);
 CREATE INDEX task_i ON tasks (project_id, user_id);
