@@ -32,6 +32,7 @@ CREATE TABLE tasks
     finish_date DATE         DEFAULT NULL,
     user_id     INT UNSIGNED NOT NULL,
     project_id  INT          NOT NULL,
+    notify      TINYINT(1)   DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (project_id) REFERENCES projects (id)
 
