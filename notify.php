@@ -10,8 +10,6 @@ $mailer = new Swift_Mailer($transport);
 
 $tasks = get_today_tasks();
 
-//var_dump($tasks);
-
 if ($tasks) {
     foreach ($tasks as $task) {
         $message = new Swift_Message();
