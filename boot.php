@@ -22,10 +22,7 @@ define('STATIC_DIR', DIRECTORY_SEPARATOR . 'static' . DIRECTORY_SEPARATOR);
 require_once('functions/helpers.php');
 require_once('functions/tasks.php');
 require_once('functions/database.php');
-
-
-
-    require_once('notify.php');
+require_once('notify.php');
 
 
 $projects = $is_auth ? get_projects_by_user_id($user['id']) : [];

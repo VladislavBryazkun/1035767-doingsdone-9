@@ -15,12 +15,10 @@ if ($tasks) {
         $message = new Swift_Message();
         $message->setSubject("Уведомление от сервиса «Дела в порядке»");
         $message->setFrom(['keks@phpdemo.ru' => 'DoingsDone 1']);
-        var_dump($task);
         $message->setto($task['email']);
         $msg_content = include_template('email_message.php', ['tasks' => $task]);
         $message->setBody($msg_content, 'text/plain');
         $result = $mailer->send($message);
-        var_dump($result);
         if ($result) {
             task_notify_update($task['id'], 1);
         }

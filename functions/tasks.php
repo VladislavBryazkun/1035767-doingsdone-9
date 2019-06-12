@@ -10,7 +10,7 @@ function important_task($date)
         return '';
     }
     $date = strtotime($date);
-    $hours = floor(($date - time())/3600);
+    $hours = floor(($date - time()) / 3600);
     return $hours <= 24 ? "task--important" : '';
 }
 
@@ -20,7 +20,7 @@ function important_task($date)
  * @param array $current_array
  * @return array
  */
-function check_in_data (array $required)
+function check_in_data(array $required)
 {
     $errors = [];
     $current_array = [];
@@ -57,13 +57,15 @@ function check_available_project_name(string $name, array $projects): bool
  * @param $key
  * @param $errors
  */
-function check_date ($key, &$errors)
+function check_date($key, &$errors)
 {
     if (!isset($errors[$key])) {
         if (!is_date_valid($_POST[$key])) {
             $errors[$key] = 'Дата не соответствует формату ГГГГ-ММ-ДД';
-        } else if (strtotime($_POST[$key]) < strtotime('today')) {
-            $errors[$key] = 'Дата должна быть больше или равна текущей';
+        } else {
+            if (strtotime($_POST[$key]) < strtotime('today')) {
+                $errors[$key] = 'Дата должна быть больше или равна текущей';
+            }
         }
     }
 }
