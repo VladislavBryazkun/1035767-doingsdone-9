@@ -1,5 +1,5 @@
 <?php
-require_once ('boot.php');
+require_once('boot.php');
 
 if (!$is_auth) {
     header("Location: /");
@@ -15,13 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $required = ['name', 'project_id'];
     list($errors, $task) = check_in_data($required);
 
-    if (!isset($errors['project_id']))
-    {
+    if (!isset($errors['project_id'])) {
         if (!is_numeric($task['project_id']) || !check_available_project_id($task['project_id'], $projects)) {
             $errors['project_id'] = "Введен не коррктный проект!";
         }
+        $task["project_id"] = is_numeric($task["project_id"]) ? intval($task["project_id"]) : 0;
     }
-    $task["project_id"] = is_numeric($task["project_id"]) ? intval($task["project_id"]) : 0;
+
 
     $task["date"] = null;
     if (isset($_POST['date']) && !empty($_POST['date'])) {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!count($errors)) {
         if (isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
-            $task['file'] = upload_file('file',   'uploads');
+            $task['file'] = upload_file('file', 'uploads');
             $task['file_name'] = $_FILES['file']['name'];
         }
         $task['user_id'] = $user['id'];

@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     list($errors, $fields) = check_in_data($required);
 
 
-
     if (!isset($errors['email']) && !filter_var($fields['email'], FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = 'Не корректно введен email';
     }

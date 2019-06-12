@@ -12,7 +12,8 @@
             <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
             <input class="form__input <?= isset($errors['email']) ? "form__input--error" : ""; ?>"
-                   type="text" name="email" id="email" value="<?= isset($fields['email']) ? $fields['email'] : ''?>" placeholder="Введите e-mail">
+                   type="text" name="email" id="email" value="<?= isset($fields['email']) ? $fields['email'] : '' ?>"
+                   placeholder="Введите e-mail">
 
             <p class="form__message"><?= isset($errors['email']) ? $errors['email'] : '' ?></p>
         </div>
@@ -21,16 +22,19 @@
             <label class="form__label" for="password">Пароль <sup>*</sup></label>
 
             <input class="form__input <?= isset($errors['password']) ? "form__input--error" : ""; ?>"
-                   type="password" name="password" id="password" value="<?= isset($fields['password']) && !isset($errors['password']) ? $fields['password'] : ''?>" placeholder="Введите пароль">
+                   type="password" name="password" id="password"
+                   value="<?= isset($fields['password']) && !isset($errors['password']) ? $fields['password'] : '' ?>"
+                   placeholder="Введите пароль">
             <p class="form__message"><?= isset($errors['password']) ? $errors['password'] : '' ?></p>
         </div>
 
         <div class="form__row">
             <label class="form__label" for="name">Имя <sup>*</sup></label>
             <input class="form__input <?= isset($errors['name']) ? "form__input--error" : ""; ?>"
-                   type="text" name="name" id="name" value="<?= isset($fields['name']) ? $fields['name'] : ''?>" placeholder="Введите имя пользователя">
+                   type="text" name="name" id="name" value="<?= isset($fields['name']) ? $fields['name'] : '' ?>"
+                   placeholder="Введите имя пользователя">
             <p class="form__message"><?= isset($errors['name']) ? $errors['name'] : '' ?></p>
-               </div>
+        </div>
 
         <div class="form__row form__row--controls">
             <p class="error-message"><?= !empty($errors) ? 'Пожалуйста, исправьте ошибки в форме' : '' ?></p>

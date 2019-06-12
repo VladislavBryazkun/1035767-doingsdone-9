@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $title; ?></title>
-    <link rel="stylesheet" href="<?=STATIC_DIR?>css/normalize.css">
-    <link rel="stylesheet" href="<?=STATIC_DIR?>css/style.css">
-    <link rel="stylesheet" href="<?=STATIC_DIR?>css/flatpickr.min.css">
+    <link rel="stylesheet" href="<?= STATIC_DIR ?>css/normalize.css">
+    <link rel="stylesheet" href="<?= STATIC_DIR ?>css/style.css">
+    <link rel="stylesheet" href="<?= STATIC_DIR ?>css/flatpickr.min.css">
 </head>
 
 <body>
@@ -16,45 +16,46 @@
     <div class="container container--with-sidebar">
         <header class="main-header">
             <a href="/">
-                <img src="<?=STATIC_DIR?>img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
+                <img src="<?= STATIC_DIR ?>img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
             <?php if ($is_auth): ?>
-            <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="/add.php">Добавить
-                    задачу</a>
+                <div class="main-header__side">
+                    <a class="main-header__side-item button button--plus open-modal" href="/add.php">Добавить
+                        задачу</a>
 
-                <div class="main-header__side-item user-menu">
-                    <div class="user-menu__data">
-                        <p><?=$user['name'] ?? ''?></p>
-                        <a href="/logout.php">Выйти</a>
+                    <div class="main-header__side-item user-menu">
+                        <div class="user-menu__data">
+                            <p><?= htmlspecialchars($user['name']) ?? '' ?></p>
+                            <a href="/logout.php">Выйти</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php else: ?>
-            <div class="main-header__side">
-                <a class="main-header__side-item button button--transparent" href="/auth.php">Войти</a>
-            </div>
+                <div class="main-header__side">
+                    <a class="main-header__side-item button button--transparent" href="/auth.php">Войти</a>
+                </div>
             <?php endif; ?>
         </header>
 
         <div class="content">
-            <?php if($is_auth): ?>
-            <section class="content__side">
-                <h2 class="content__side-heading">Проекты</h2>
-                <nav class="main-navigation">
-                    <ul class="main-navigation__list">
-                        <?php foreach ($projects as $project): ?>
-                            <li class="main-navigation__list-item <?= isset($project_id) ? $project_id === $project['id'] ? 'main-navigation__list-item--active' : '' : '' ?>">
-                                <a class="main-navigation__list-item-link" href="/?project_id=<?=$project['id']?>"><?= $project['name']; ?></a>
-                                <span class="main-navigation__list-item-count"><?= $project['count'] ?></span>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </nav>
+            <?php if ($is_auth): ?>
+                <section class="content__side">
+                    <h2 class="content__side-heading">Проекты</h2>
+                    <nav class="main-navigation">
+                        <ul class="main-navigation__list">
+                            <?php foreach ($projects as $project): ?>
+                                <li class="main-navigation__list-item <?= isset($project_id) ? $project_id === $project['id'] ? 'main-navigation__list-item--active' : '' : '' ?>">
+                                    <a class="main-navigation__list-item-link"
+                                       href="/?project_id=<?= $project['id'] ?>"><?= htmlspecialchars($project['name']); ?></a>
+                                    <span class="main-navigation__list-item-count"><?= $project['count'] ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </nav>
 
-                <a class="button button--transparent button--plus content__side-button"
-                   href="/add_project.php" target="project_add">Добавить проект</a>
-            </section>
+                    <a class="button button--transparent button--plus content__side-button"
+                       href="/add_project.php" target="project_add">Добавить проект</a>
+                </section>
             <?php endif; ?>
             <?= $content; ?>
         </div>
@@ -69,9 +70,9 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
-        <?php if($is_auth): ?>
+        <?php if ($is_auth): ?>
             <a class="main-footer__button button button--plus" href="/add.php">Добавить задачу</a>
-        <?php endif;?>
+        <?php endif; ?>
 
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>
@@ -116,13 +117,13 @@
             <span class="visually-hidden">Разработано:</span>
 
             <a href="https://htmlacademy.ru/intensive/php">
-                <img src="<?=STATIC_DIR?>img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
+                <img src="<?= STATIC_DIR ?>img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
             </a>
         </div>
     </div>
 </footer>
 
-<script src="<?=STATIC_DIR?>scripts/flatpickr.js"></script>
-<script src="<?=STATIC_DIR?>scripts/script.js"></script>
+<script src="<?= STATIC_DIR ?>scripts/flatpickr.js"></script>
+<script src="<?= STATIC_DIR ?>scripts/script.js"></script>
 </body>
 </html>

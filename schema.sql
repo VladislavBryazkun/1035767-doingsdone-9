@@ -28,6 +28,7 @@ CREATE TABLE tasks
     status      TINYINT(1)   DEFAULT 0,
     date_create TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
     name        VARCHAR(512) NOT NULL,
+    file_name   VARCHAR(512) DEFAULT NULL,
     file        VARCHAR(512) DEFAULT NULL,
     finish_date DATE         DEFAULT NULL,
     user_id     INT UNSIGNED NOT NULL,

@@ -43,12 +43,11 @@ function get_tasks_by_user_id(int $user_id, int $project_id = 0, string $search_
     }
 
 
-
     $link = DbConnection::getConnection();
     if (!empty($search_query)) {
-        $where_query .= " AND MATCH (name) AGAINST ('".mysqli_real_escape_string($link, $search_query)."')";
+        $where_query .= " AND MATCH (name) AGAINST ('" . mysqli_real_escape_string($link, $search_query) . "')";
     }
-    $query = "SELECT * FROM tasks WHERE user_id=? ".$where_query;
+    $query = "SELECT * FROM tasks WHERE user_id=? " . $where_query;
     $projects = db_fetch_data($link, $query, [$user_id]);
     return $projects ?? [];
 }
@@ -133,7 +132,7 @@ function add_project(int $user_id, string $name): int
  * @param string $email
  * @return array
  */
-function get_user_by_email (string $email): array
+function get_user_by_email(string $email): array
 {
     $link = DbConnection::getConnection();
     $query = "SELECT * FROM users WHERE email=?";
@@ -174,7 +173,7 @@ function task_notify_update(int $task_id, int $status)
  * Создание пользователя.
  * @param array $users
  */
-function create_user (array $users)
+function create_user(array $users)
 {
     $link = DbConnection::getConnection();
     $query = "INSERT INTO users (email, name, password) VALUES (?, ?, ?)";

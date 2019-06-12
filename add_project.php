@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors['name'] = "Проект с данным названием уже существует!";
         }
     }
-    if (!count($errors)){
+    if (!count($errors)) {
         $id = add_project($user['id'], $fields['name']);
 
         if ($id) {
-           header("Location: /?project_id=" . $id);
+            header("Location: /?project_id=" . $id);
         }
     }
 }
